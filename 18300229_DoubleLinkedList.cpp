@@ -7,16 +7,15 @@ using namespace std;
 template <class T>
 class List	//Contains the activities of the list.
 {
-	class Node //Creates or nodes.
+	class Node //Creates our nodes.
 	{
 	public:
 		T data = NULL; //Holds a generic data value.
 		Node* nextLink,
-			prevLink; //Points to the next element.
+			* prevLink; //Points to the next element.
 		Node()
 		{
 			nextLink = nullptr;
-			prevLink = nullptr;
 		}
 	};
 
@@ -35,13 +34,17 @@ public:
 		newNode->data = data;
 
 		if (beggining == nullptr)
+		{
 			beggining = newNode;
+			beggining->prevLink = nullptr;
+		}
 		else
 		{
 			cursor = beggining;
-			while (cursor->nextLink) //while next link is not empty.
+			while (cursor->nextLink) //finds last element while cursor->nextLink is not empty.
 				cursor = cursor->nextLink;
-			cursor->nextLink = newNode;
+			cursor->nextLink = newNode;		//Creates a new node.
+			newNode->prevLink = cursor;		//PrevLink points to the node before this one.
 		}
 	}
 	T getValue(T index)	//

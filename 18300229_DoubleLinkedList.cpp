@@ -1,4 +1,4 @@
-// 18300229_SimpleLinkedLIst - P 2.2 Lista Doble
+// 18300229_DoubleLinkedList - P 2.2 Lista Doble
 #include <iostream>
 #include <conio.h>
 #include <windows.h>

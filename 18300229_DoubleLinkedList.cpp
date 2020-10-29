@@ -135,13 +135,13 @@ public:
 				for (int i = 0; i < dataPos; i++)	//Puts erase cursor in the node we wish to erase.
 					erase = erase->nextLink;
 
-				join = erase->prevLink;	//Element previous to the element about to be erase
-				join->nextLink = erase->nextLink; //Joins the link of prev node with item next to erase
+				join = erase->prevLink;	//Cursor moves 1 position before erase
+				join->nextLink = erase->nextLink; //Link now points to element after erase
 
 				if (dataPos != count())	//If not last
 				{
-					join = erase->nextLink;	//Element next to the element about to be erase
-					join->prevLink = erase->prevLink; //Joins the link of next node with item prev to erase
+					join = erase->nextLink;	//Cursor moves 1 position after erase
+					join->prevLink = erase->prevLink; //Link points now position before element to erase
 				}
 			}
 			delete erase;

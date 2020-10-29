@@ -16,6 +16,7 @@ class List	//Contains the activities of the list.
 		Node()
 		{
 			nextLink = nullptr;
+			prevLink = nullptr;
 		}
 	};
 
@@ -124,24 +125,26 @@ public:
 
 		if (dataPos > -1) //If element was found, execute erase function.
 		{
-			Node* erase = beggining,
-				* prevElement = nullptr;
+			Node* erase = beggining,	//Element about to be erased
+				* join = nullptr;				//Aux to rejoin nodes.
 
-			if (dataPos == 0) //If first element is deleted.
-			{
+			if (dataPos == 0)
 				beggining = beggining->nextLink;
-				delete erase;
-			}
 			else
 			{
-				for (int i = 0; i < dataPos; i++)
-				{
-					prevElement = erase;
+				for (int i = 0; i < dataPos; i++)	//Puts erase cursor in the node we wish to erase.
 					erase = erase->nextLink;
+
+				join = erase->prevLink;	//Element previous to the element about to be erase
+				join->nextLink = erase->nextLink; //Joins the link of prev node with item next to erase
+
+				if (dataPos != count())	//If not last
+				{
+					join = erase->nextLink;	//Element next to the element about to be erase
+					join->prevLink = erase->prevLink; //Joins the link of next node with item prev to erase
 				}
-				prevElement->nextLink = erase->nextLink;
-				delete erase;
 			}
+			delete erase;
 			cout << "\n>Value found and deleted successfully." << endl;
 		}
 		else
@@ -180,7 +183,7 @@ int main()
 	{
 		char choice = 0;
 		system("cls");
-		cout << "========Simple Linked List=========" << endl;
+		cout << "========Double Linked List=========" << endl;
 
 		do //Loop until correct input
 		{
